@@ -1,0 +1,36 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div>
+<h2>
+    <span>hello</span>
+    </h2>
+    <div class="col-md-4"> 
+            Name:  <input [value]="name" />
+            You have Entered : {{name}}    <br/>
+    </div>
+    <div class="col-md-4">
+       Name:  <input [value]="name1" (input)= "name1=$event.target.value"/>
+        You have Entered : {{name1}}
+    </div>
+    <div class="col-md-4">
+        Name:  <input [(ngModel)]="name2"/>
+         You have Entered : {{name2}}
+     </div>
+     </div> <br/> <br/>
+
+     <div style="padding: 5px">
+        <ul class="nav nav-tabs">
+            <li routerLinkActive="active"><a routerLink="home">Home</a></li>
+            <li routerLinkActive="active"><a routerLink="employees">Employees</a></li>
+        </ul>
+        <router-outlet></router-outlet>
+
+     </div>
+
+     
+     <div>
+       
+        User Input <input type="text" [(ngModel)] = "simpleText"/>
+        <simple [copyText] = "simpleText"> </simple>
+     </div>
+
