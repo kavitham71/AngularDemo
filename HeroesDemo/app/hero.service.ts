@@ -11,7 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
  )
 export class HeroService {
 
-  private heroesUrl = 'localhost:3000/'; 
+  private heroesUrl = 'http://localhost:4200/heroes'; 
   constructor( private http: HttpClient, private messageService: MessageService) { }
 
   
@@ -39,6 +39,16 @@ getHeroes (): Observable<Hero[]> {
       catchError(this.handleError<Hero[]>('getHeroes', []))
     );
 }
+ 
+/** GET hero by id. Will 404 if id not found */
+getHero(id: number): Observable<Hero> {
+  const url = `${this.heroesUrl}/${id}`;
+  return this.http.get<Hero>(url).pipe(
+    tap(_ => this.log(`fetched hero id=${id}`)),
+    catchError(this.handleError<Hero>(`getHero id=${id}`))
+  );
+}
+
 private handleError<T> (operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
  
